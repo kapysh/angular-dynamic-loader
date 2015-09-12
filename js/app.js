@@ -15,8 +15,14 @@ portalControllers.config(['$controllerProvider',
 }]);
 
 portal.constant('CONTROLLER_PATHS', {
-  'portalController': '/js/controllers/portal.controller.js',
-  'secondPageController': '/js/controllers/secondpage.controller.js'
+  'portalController': {
+    path: '/js/controllers/portal.controller.js',
+    loaded: false
+  }
+  'secondPageController': {
+    path: '/js/controllers/secondpage.controller.js',
+    loaded: false
+  }
 })
 
 .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$uiViewScrollProvider',

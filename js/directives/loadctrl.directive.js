@@ -7,15 +7,18 @@ angular.module('portal.directives')
     priority: 100000,
     link: function(scope, element, attrs, ctrl) {
       var controllerName = attrs.loadCtrl;
-      var controllerPath = CONTROLLER_PATHS[controllerName]
+      var controller = CONTROLLER_PATHS[controllerName];
       
-      if(controllerPath) {
-        // append script tag to head
-        var script = document.createElement( 'script' );
-        script.type = 'application/javascript';
-        script.src = controllerPath;
-        $('head').append(script);
+      if(controller) {
+        if(!controller.loaded) {
+          // append script tag to head
+          var script = document.createElement( 'script' );
+          script.type = 'application/javascript';
+          script.src = controllerPath;
+          $('head').append(script);
+        }
 
+        CONTROLLER_PATHS[controllerName].loaded = true;
         // add ng-controller
         element.attr('ng-controller', controllerName);
         element.removeAttr('load-ctrl');
